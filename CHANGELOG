@@ -1,0 +1,83 @@
+BUILD 2006292220333
+
+-- Added dyn_getvalue_rowid()  (Thanks Tony Suslovich)
+-- Added dyn_getvalue_recid()  (Thanks Tony Suslovich) 
+-- Added comments how to compile in dyn_findinschema.p
+
+BUILD 2006220234254
+
+-- Added dyn_tablehdl
+-- Added dyntoolkit.html (Webspeed example of using dyntoolkit)
+
+BUILD 2006219201537
+
+-- Added dyn_fieldtype ()
+-- Added dyn_getvalue_raw ()
+-- Modified dyn_getvalue() to return a string regardless of data type.  Raw can 
+   hose Webspeed output.
+-- Added dyn_fieldhndl () WARNING - NOT TESTED!!!
+-- Updated documentation
+
+BUILD 2006212170853
+
+-- Added dyn_numfields ()
+-- Added dyn_listfields ()
+-- Added dyn_numtables ()
+-- Added dyn_listtables ()
+-- Updated documentation
+-- Added tst1.p - a testing/demo program.
+
+BUILD 2006180223735
+
+-- Documentation kudo's for Dayne
+
+BUILD 2006180223339
+
+** WARNING  Using a dyn_set*() function on a field used to order the query
+            tends to hose the query.
+	      
+-- Added query-close() call in dyn_close().
+
+-- Create a dyn_seti() for setting INTEGER values
+
+-- Create a dyn_setl() for setting LOGICAL values
+
+-- Create a dyn_setd() for setting DATE values
+
+-- Create a dyn_setf() for setting DECIMAL values
+
+-- Create a dyn_setc() for setting CHARACTER values
+
+-- Documentation for these new functions.
+
+BUILD 2006177192657
+
+-- Minor corrections in the source code comments - but hey - important too
+
+BUILD 2006177191659
+
+-- Corrected documentation about minimum progress version this will work on
+
+-- Support multi-database applications (Special thanks Dayne May daynem @ linx.com.au)
+
+-- Performance preprocessor between single and multiple DB applications
+
+-- Documentation for performance option
+
+BUILD 2006174160920
+
+-- Made GeTables function a dyn_gettables() api and documented.
+
+-- Added error 102
+
+-- Additional documentation on error handling.
+
+-- Add dyn_numresults() api (Seems kinda flaky on 9.1C RH Linux 6.2)
+
+-- Create the api dyn_qryinfo() to be used in external procedures 
+   that receive a dynamic query handle as an argument.  Additional
+   documentation on this.
+
+BUILD 2006173203154
+
+Initial Release

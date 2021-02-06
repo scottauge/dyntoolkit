@@ -1,0 +1,120 @@
+<!--WSS
+
+DEFINE VARIABLE cFieldList AS CHARACTER NO-UNDO.
+DEFINE VARIABLE cFieldName AS CHARACTER NO-UNDO.
+DEFINE VARIABLE iNumFields AS INTEGER NO-UNDO.
+DEFINE VARIABLE iCurField  AS INTEGER NO-UNDO.
+
+DEFINE VARIABLE cTableList AS CHARACTER NO-UNDO.
+DEFINE VARIABLE cCurTable  AS CHARACTER NO-UNDO.
+DEFINE VARIABLE iNumTables AS INTEGER NO-UNDO.
+DEFINE VARIABLE iCurTable  AS INTEGER NO-UNDO.
+
+DEFINE VARIABLE hQry       AS HANDLE NO-UNDO.
+DEFINE VARIABLE cQry       AS CHARACTER NO-UNDO.
+
+{dyntoolkit.i}
+
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Dynamic Queries with Dynamic Tool Kit</title>
+</head>
+
+<body>
+<form method="post">
+<textarea name="Query" cols="80" rows="3">`GET-VALUE("Query")`</textarea>
+<input type="submit">
+</form>
+
+<!--WSS
+ASSIGN cQry = GET-VALUE("Query").
+
+IF cQry <> "" THEN DO:
+
+  ASSIGN hQry = dyn_open(cQry).
+  
+  IF cDyn_ErrCode <> "000" THEN DO:
+  
+    dyn_close(hQry).
+	{&OUT} "An Error happened in the query! " cDyn_ErrCode " " cDyn_ErrMsg.
+	RETURN.
+	
+  END.
+  
+  -->
+
+<table width="80%" border="0">
+  
+    <tr>
+	
+	  <!--WSS
+	
+	  /* Figure out our fields and list em out */
+	
+	  ASSIGN cTableList = dyn_listtables(hQry)
+	         iNumTables = NUM-ENTRIES (cTableList).
+			 
+      DO iCurTable = 1 TO iNumTables:
+	  	 
+	    ASSIGN cCurTable = ENTRY(iCurTable, cTableList)
+		       cFieldList = dyn_listfields(hQry, cCurTable)
+			   iNumFields = NUM-ENTRIES(cFieldList).
+		
+	    DO iCurField = 1 TO iNumFields:
+		
+		  ASSIGN cFieldName = ENTRY(iCurField, cFieldList).
+	      -->
+          <td bgcolor="#CCCCCC"><b>`cCurTable`.`cFieldName`</b></td>
+	      <!--WSS
+	  
+	    END. /* DO iCurField ... */
+		
+	  END. /* DO iCurTable ... */
+	  
+	  -->
+    </tr>
+	<!--WSS
+	REPEAT:
+	
+	  dyn_next (hQry).
+	  IF dyn_qoe (hQry) THEN LEAVE.
+	  
+	-->
+    <tr>
+	  <!--WSS
+      DO iCurTable = 1 TO iNumTables:
+	  	 
+	    ASSIGN cCurTable = ENTRY(iCurTable, cTableList)
+		       cFieldList = dyn_listfields(hQry, cCurTable)
+			   iNumFields = NUM-ENTRIES(cFieldList).
+			
+	    DO iCurField = 1 TO iNumFields:
+		
+		  ASSIGN cFieldName = ENTRY(iCurField, cFieldList).
+		  
+	      -->
+          <td>`STRING(dyn_getvalue(hQry, cCurTable + "." + cFieldName))`</td>
+	      <!--WSS
+	  
+	    END. /* DO iCurField ... */
+		
+	  END. /* DO iCurTable ... */
+	  -->
+    </tr>
+	<!--WSS
+	END. /* REPEAT ... */
+	-->
+  </table>
+
+  <!--WSS
+
+  dyn_close (hQry).
+  
+END. /* IF cQry <> "" */
+-->
+
+</body>
+</html>
